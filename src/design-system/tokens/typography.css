@@ -1,0 +1,97 @@
+/**
+ * Upvote UI Kit — Typography Tokens
+ * System font stack per Reddit RPL; weight 600 for interactive hierarchy.
+ */
+@theme {
+  --font-upvote-sans: -apple-system, "system-ui", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-upvote-mono: "Noto Mono", ui-monospace, monospace;
+
+  /* Type scale */
+  --text-upvote-display: 2rem;       /* 32px — subreddit headers */
+  --text-upvote-h1: 1.5rem;          /* 24px — section headings */
+  --text-upvote-h2: 1.125rem;        /* 18px — post titles prominent */
+  --text-upvote-h3: 1rem;            /* 16px — post titles standard */
+  --text-upvote-body: 0.875rem;      /* 14px — body / comments */
+  --text-upvote-caption: 0.75rem;    /* 12px — metadata, timestamps */
+  --text-upvote-label: 0.875rem;     /* 14px — button labels */
+  --text-upvote-label-sm: 0.75rem;   /* 12px — small action pills */
+
+  /* Line heights */
+  --leading-upvote-tight: 1;
+  --leading-upvote-snug: 1.25;
+  --leading-upvote-normal: 1.33;
+  --leading-upvote-relaxed: 1.5;
+
+  /* Font weights */
+  --font-weight-upvote-regular: 400;
+  --font-weight-upvote-medium: 500;
+  --font-weight-upvote-semibold: 600;
+  --font-weight-upvote-bold: 700;
+}
+
+/* Typography utility classes */
+@layer components {
+  .upvote-display {
+    font-family: var(--font-upvote-sans);
+    font-size: var(--text-upvote-display);
+    font-weight: var(--font-weight-upvote-bold);
+    line-height: var(--leading-upvote-normal);
+    color: var(--color-upvote-text-strong);
+  }
+
+  .upvote-h1 {
+    font-family: var(--font-upvote-sans);
+    font-size: var(--text-upvote-h1);
+    font-weight: var(--font-weight-upvote-bold);
+    line-height: var(--leading-upvote-normal);
+    color: var(--color-upvote-text-strong);
+  }
+
+  .upvote-h2 {
+    font-family: var(--font-upvote-sans);
+    font-size: var(--text-upvote-h2);
+    font-weight: var(--font-weight-upvote-semibold);
+    line-height: var(--leading-upvote-normal);
+    color: var(--color-upvote-text-strong);
+  }
+
+  .upvote-h3 {
+    font-family: var(--font-upvote-sans);
+    font-size: var(--text-upvote-h3);
+    font-weight: var(--font-weight-upvote-semibold);
+    line-height: var(--leading-upvote-snug);
+    color: var(--color-upvote-text-strong);
+  }
+
+  .upvote-body {
+    font-family: var(--font-upvote-sans);
+    font-size: var(--text-upvote-body);
+    font-weight: var(--font-weight-upvote-regular);
+    line-height: var(--leading-upvote-relaxed);
+    color: var(--color-upvote-text);
+  }
+
+  .upvote-caption {
+    font-family: var(--font-upvote-sans);
+    font-size: var(--text-upvote-caption);
+    font-weight: var(--font-weight-upvote-regular);
+    line-height: var(--leading-upvote-relaxed);
+    color: var(--color-upvote-text-weak);
+  }
+
+  .upvote-label {
+    font-family: var(--font-upvote-sans);
+    font-size: var(--text-upvote-label);
+    font-weight: var(--font-weight-upvote-semibold);
+    line-height: var(--leading-upvote-tight);
+    color: var(--color-upvote-text-strong);
+  }
+
+  .upvote-label-sm {
+    font-family: var(--font-upvote-sans);
+    font-size: var(--text-upvote-label-sm);
+    font-weight: var(--font-weight-upvote-semibold);
+    line-height: var(--leading-upvote-tight);
+    color: var(--color-upvote-text-strong);
+  }
+}

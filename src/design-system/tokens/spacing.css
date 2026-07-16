@@ -1,0 +1,67 @@
+/**
+ * Upvote UI Kit — Grid, Spacing & Breakpoint Tokens
+ * Base unit: 4px. Max content width: 1200px.
+ */
+@theme {
+  /* Spacing scale (4px base) */
+  --spacing-upvote-0: 0;
+  --spacing-upvote-1: 0.25rem;   /* 4px */
+  --spacing-upvote-2: 0.5rem;    /* 8px */
+  --spacing-upvote-3: 0.75rem;   /* 12px */
+  --spacing-upvote-4: 1rem;      /* 16px */
+  --spacing-upvote-5: 1.25rem;   /* 20px */
+  --spacing-upvote-6: 1.5rem;    /* 24px */
+  --spacing-upvote-8: 2rem;      /* 32px */
+  --spacing-upvote-12: 3rem;     /* 48px */
+
+  /* Container */
+  --width-upvote-container: 75rem;       /* 1200px */
+  --width-upvote-feed: 40rem;            /* 640px */
+  --width-upvote-sidebar: 20rem;         /* 320px */
+
+  /* Border radius */
+  --radius-upvote-sm: 0.25rem;   /* 4px — chips, tooltips */
+  --radius-upvote-md: 0.5rem;    /* 8px — form inputs, containers */
+  --radius-upvote-lg: 1rem;      /* 16px — post cards, modals */
+  --radius-upvote-pill: 999px;
+  --radius-upvote-full: 9999px;
+
+  /* Breakpoints */
+  --breakpoint-upvote-sm: 40rem;   /* 640px */
+  --breakpoint-upvote-md: 64rem;   /* 1024px */
+  --breakpoint-upvote-lg: 80rem;   /* 1280px */
+
+  /* Component sizing */
+  --height-upvote-button: 2.5rem;      /* 40px */
+  --height-upvote-button-sm: 2rem;     /* 32px */
+  --height-upvote-button-ghost: 2.375rem; /* 38px */
+  --height-upvote-input: 2.5rem;
+  --height-upvote-topbar: 3.5rem;       /* 56px */
+  --width-upvote-sidebar-nav: 16rem;    /* 256px */
+}
+
+@layer components {
+  .upvote-container {
+    width: 100%;
+    max-width: var(--width-upvote-container);
+    margin-inline: auto;
+    padding-inline: var(--spacing-upvote-4);
+  }
+
+  .upvote-feed-column {
+    width: 100%;
+    max-width: var(--width-upvote-feed);
+  }
+
+  .upvote-grid-main {
+    display: grid;
+    gap: var(--spacing-upvote-6);
+    grid-template-columns: 1fr;
+  }
+
+  @media (min-width: 64rem) {
+    .upvote-grid-main {
+      grid-template-columns: 1fr var(--width-upvote-sidebar);
+    }
+  }
+}

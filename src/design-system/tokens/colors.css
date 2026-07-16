@@ -1,0 +1,71 @@
+/**
+ * Upvote UI Kit — Color Tokens
+ * Source: r/Upvote UI Kit (Figma node 3:1242), Reddit RPL Jan 2024
+ * Namespaced as `upvote-*` to avoid breaking existing pages during migration.
+ */
+@theme {
+  /* Brand */
+  --color-upvote-brand: #ff4500;
+  --color-upvote-brand-hover: #cc3700;
+  --color-upvote-primary: #d93900;
+  --color-upvote-primary-hover: #ae2c00;
+  --color-upvote-primary-disabled: rgba(217, 57, 0, 0.3);
+
+  /* Vote polarity */
+  --color-upvote-upvote: #ff4500;
+  --color-upvote-upvote-fill: #d93900;
+  --color-upvote-downvote: #6a5cff;
+  --color-upvote-downvote-hover: #523dff;
+  --color-upvote-downvote-disabled: rgba(106, 92, 255, 0.3);
+
+  /* Interactive / links */
+  --color-upvote-alien-blue: #1870f4;
+  --color-upvote-action-primary: #0a449b;
+  --color-upvote-action-secondary: #0a2f6c;
+  --color-upvote-link: #115bca;
+  --color-upvote-link-hover: #0a449b;
+  --color-upvote-link-visited: #9b00d4;
+  --color-upvote-focus: #0a449b;
+
+  /* Surfaces */
+  --color-upvote-canvas: #ffffff;
+  --color-upvote-ui-canvas: #f2f2f2;
+  --color-upvote-surface: #ffffff;
+  --color-upvote-surface-secondary: #e5ebee;
+  --color-upvote-surface-hover: #f6f8f9;
+  --color-upvote-surface-container: #eef1f3;
+  --color-upvote-surface-input: #f6f8f9;
+  --color-upvote-surface-search: #f8f8f8;
+
+  /* Dark mode surfaces (Upvote UI desktop kit includes dark chrome) */
+  --color-upvote-dark-canvas: #0e1113;
+  --color-upvote-dark-surface: #181c1f;
+  --color-upvote-dark-surface-elevated: #1a1a1b;
+  --color-upvote-dark-border: #2a3236;
+
+  /* Text */
+  --color-upvote-text-strong: #181c1f;
+  --color-upvote-text: #333d42;
+  --color-upvote-text-weak: #5c6c74;
+  --color-upvote-text-inverse: #ffffff;
+  --color-upvote-text-dark: #f2f4f5;
+  --color-upvote-text-muted-dark: #838f99;
+
+  /* Borders */
+  --color-upvote-border: rgba(0, 0, 0, 0.2);
+  --color-upvote-border-ghost: rgba(0, 0, 0, 0.498);
+  --color-upvote-border-light: #d3d6da;
+  --color-upvote-border-dark: #2a3236;
+
+  /* Status */
+  --color-upvote-success: #008a10;
+  --color-upvote-danger: #bc0117;
+  --color-upvote-warning: #b78800;
+  --color-upvote-nsfw: #de019f;
+  --color-upvote-nsfw-bg: rgba(222, 1, 159, 0.15);
+  --color-upvote-spoiler-bg: rgba(19, 19, 19, 0.15);
+  --color-upvote-gold: #ffd635;
+
+  /* Overlays */
+  --color-upvote-scrim: rgba(0, 0, 0, 0.6);
+}

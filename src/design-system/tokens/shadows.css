@@ -1,0 +1,18 @@
+/**
+ * Upvote UI Kit — Elevation & Motion Tokens
+ */
+@theme {
+  --shadow-upvote-sm: 0 0.0625rem 0.25rem 0 rgba(0, 0, 0, 0.149), 0 0.25rem 0.25rem 0 rgba(0, 0, 0, 0.149);
+  --shadow-upvote-md: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.102), 0 0.375rem 0.75rem rgba(0, 0, 0, 0.251);
+  --shadow-upvote-modal: 0 2px 15px rgba(26, 26, 27, 0.3);
+  --shadow-upvote-nav: 0 4px 14px rgba(0, 0, 0, 0.1);
+
+  --duration-upvote-instant: 0ms;
+  --duration-upvote-fast: 150ms;
+  --duration-upvote-standard: 200ms;
+  --duration-upvote-slow: 300ms;
+
+  --ease-upvote-enter: cubic-bezier(0.2, 0.6, 0.25, 1);
+  --ease-upvote-exit: cubic-bezier(0.4, 0, 1, 1);
+  --ease-upvote-standard: cubic-bezier(0.25, 0.1, 0.25, 1);
+}
