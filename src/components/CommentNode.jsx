@@ -149,7 +149,7 @@ const CommentNode = ({ comment, onAddReply, onDeleteComment, onEditComment }) =>
                     <textarea 
                       value={editText}
                       onChange={(e) => setEditText(e.target.value)}
-                      className="w-full bg-white/5 border border-white/10 rounded-xl px-3 py-1.5 text-xs text-white focus:outline-none focus:border-brand-primary"
+                      className="w-full bg-white/5 border border-white/10 rounded-xl px-3 py-1.5 text-xs text-brand-text focus:outline-none focus:border-brand-primary"
                       rows={2}
                       disabled={editLoading}
                     />
@@ -174,7 +174,7 @@ const CommentNode = ({ comment, onAddReply, onDeleteComment, onEditComment }) =>
                     </div>
                   </form>
                 ) : (
-                  <p className={`text-xs md:text-sm leading-relaxed ${isDeleted ? 'text-brand-muted italic' : 'text-white'}`}>
+                  <p className={`text-xs md:text-sm leading-relaxed ${isDeleted ? 'text-brand-muted italic' : 'text-brand-text'}`}>
                     {comment.content}
                   </p>
                 )}
@@ -187,7 +187,7 @@ const CommentNode = ({ comment, onAddReply, onDeleteComment, onEditComment }) =>
                       <button 
                         onClick={() => setShowReplyForm(!showReplyForm)}
                         className={`flex items-center gap-1 text-[11px] font-bold transition-colors ${
-                          showReplyForm ? 'text-brand-primary' : 'text-brand-muted hover:text-white'
+                          showReplyForm ? 'text-brand-primary' : 'text-brand-muted hover:text-brand-text'
                         }`}
                       >
                         <MessageSquare size={13} />
@@ -200,7 +200,7 @@ const CommentNode = ({ comment, onAddReply, onDeleteComment, onEditComment }) =>
                       <>
                         <button 
                           onClick={() => setIsEditing(true)}
-                          className="flex items-center gap-1 text-[11px] text-brand-muted hover:text-white font-bold transition-all"
+                          className="flex items-center gap-1 text-[11px] text-brand-muted hover:text-brand-text font-bold transition-all"
                         >
                           <Edit3 size={13} />
                         </button>
@@ -243,7 +243,7 @@ const CommentNode = ({ comment, onAddReply, onDeleteComment, onEditComment }) =>
                         placeholder={`Reply to ${author.username}...`}
                         value={replyText}
                         onChange={(e) => setReplyText(e.target.value)}
-                        className="w-full bg-white/5 border border-white/5 rounded-lg px-3 py-1.5 text-xs text-white focus:outline-none focus:border-brand-primary placeholder-brand-muted shrink-0"
+                        className="w-full bg-white/5 border border-white/5 rounded-lg px-3 py-1.5 text-xs text-brand-text focus:outline-none focus:border-brand-primary placeholder-brand-muted shrink-0"
                         rows={2}
                         disabled={replyLoading}
                       />

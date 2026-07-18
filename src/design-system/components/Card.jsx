@@ -1,73 +1,178 @@
-import { forwardRef } from 'react';
-import { cn } from '../utils/cn';
+import { forwardRef } from "react";
+import JoyCard from "@mui/joy/Card";
+import CardContent from "@mui/joy/CardContent";
+import CardOverflow from "@mui/joy/CardOverflow";
+import Typography from "@mui/joy/Typography";
+import Divider from "@mui/joy/Divider";
+import Box from "@mui/joy/Box";
 
 const variants = {
-  post: 'bg-upvote-surface border border-upvote-border rounded-upvote-lg shadow-upvote-sm',
-  container: 'bg-upvote-surface-container rounded-upvote-md',
-  elevated: 'bg-upvote-surface border border-upvote-border rounded-upvote-lg shadow-upvote-md',
-  flat: 'bg-upvote-surface rounded-upvote-md',
+  post: {
+    variant: "outlined",
+    color: "neutral",
+    sx: {
+      borderRadius: "16px",
+      bgcolor: "background.surface",
+      borderColor: "neutral.outlinedBorder",
+      transition: "all .2s ease",
+      "&:hover": {
+        boxShadow: "0 12px 30px rgba(15, 23, 42, 0.07)",
+        transform: "translateY(-2px)",
+      },
+    },
+  },
+
+  container: {
+    variant: "soft",
+    color: "neutral",
+    sx: {
+      borderRadius: "16px",
+    },
+  },
+
+  elevated: {
+    variant: "outlined",
+    color: "neutral",
+    sx: {
+      borderRadius: "16px",
+      bgcolor: "background.surface",
+      borderColor: "neutral.outlinedBorder",
+      boxShadow: "0 10px 24px rgba(15, 23, 42, 0.06)",
+    },
+  },
+
+  flat: {
+    variant: "plain",
+    color: "neutral",
+    sx: {
+      borderRadius: "16px",
+    },
+  },
 };
 
 const paddings = {
-  none: 'p-0',
-  sm: 'p-3',
-  md: 'p-4',
-  lg: 'p-6',
+  none: 0,
+  sm: 2,
+  md: 3,
+  lg: 4,
 };
 
-/**
- * Upvote UI Card
- * Variants: post | container | elevated | flat
- */
 export const Card = forwardRef(function Card(
-  { variant = 'post', padding = 'md', className, children, as: Component = 'div', ...props },
+  {
+    variant = "post",
+    padding = "md",
+    className,
+    children,
+    sx,
+    ...props
+  },
   ref
 ) {
+  const config = variants[variant];
+
   return (
-    <Component
+    <JoyCard
       ref={ref}
-      className={cn(variants[variant], paddings[padding], className)}
+      className={className}
+      variant={config.variant}
+      color={config.color}
+      invertedColors={config.invertedColors}
+      sx={{
+        p: paddings[padding],
+        ...config.sx,
+        ...sx,
+      }}
       {...props}
     >
       {children}
-    </Component>
+    </JoyCard>
   );
 });
 
-export function CardHeader({ className, children, ...props }) {
-  return (
-    <div className={cn('flex items-center gap-2 mb-3', className)} {...props}>
-      {children}
-    </div>
-  );
-}
+Card.displayName = "Card";
 
-export function CardTitle({ className, children, as: Component = 'h3', ...props }) {
+export function CardHeader({
+  children,
+  className,
+  sx,
+  ...props
+}) {
   return (
-    <Component className={cn('upvote-h3', className)} {...props}>
-      {children}
-    </Component>
-  );
-}
-
-export function CardBody({ className, children, ...props }) {
-  return (
-    <div className={cn('upvote-body', className)} {...props}>
-      {children}
-    </div>
-  );
-}
-
-export function CardFooter({ className, children, ...props }) {
-  return (
-    <div
-      className={cn(
-        'flex items-center gap-2 mt-3 pt-3 border-t border-upvote-border',
-        className
-      )}
+    <CardOverflow
+      className={className}
+      sx={{
+        px: 0,
+        pb: 2,
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "space-between",
+        gap: 1,
+        ...sx,
+      }}
       {...props}
     >
       {children}
-    </div>
+    </CardOverflow>
+  );
+}
+
+export function CardTitle({
+  children,
+  level = "h4",
+  sx,
+  ...props
+}) {
+  return (
+    <Typography
+      level={level}
+      fontWeight="lg"
+      sx={sx}
+      {...props}
+    >
+      {children}
+    </Typography>
+  );
+}
+
+export function CardBody({
+  children,
+  sx,
+  ...props
+}) {
+  return (
+    <CardContent
+      sx={{
+        p: 0,
+        ...sx,
+      }}
+      {...props}
+    >
+      {children}
+    </CardContent>
+  );
+}
+
+export function CardFooter({
+  children,
+  sx,
+  ...props
+}) {
+  return (
+    <>
+      <Divider sx={{ my: 2 }} />
+
+      <Box
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          gap: 1,
+          ...sx,
+        }}
+        {...props}
+      >
+        {children}
+      </Box>
+    </>
   );
 }

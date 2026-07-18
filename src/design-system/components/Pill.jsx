@@ -1,70 +1,120 @@
-import { cn } from '../utils/cn';
+import Chip from "@mui/joy/Chip";
+import Avatar from "@mui/joy/Avatar";
+import Typography from "@mui/joy/Typography";
 
 const variants = {
-  default: 'bg-upvote-surface-secondary text-upvote-text',
-  outline: 'bg-transparent border border-upvote-border-light text-upvote-text',
-  brand: 'bg-upvote-brand/10 text-upvote-brand',
-  nsfw: 'bg-upvote-nsfw-bg text-upvote-nsfw',
-  spoiler: 'bg-upvote-spoiler-bg text-upvote-text-strong',
-  success: 'bg-upvote-success/10 text-upvote-success',
-  tag: 'bg-upvote-surface-secondary text-upvote-text-weak',
+  default: {
+    variant: "soft",
+    color: "neutral",
+  },
+  outline: {
+    variant: "outlined",
+    color: "neutral",
+  },
+  brand: {
+    variant: "soft",
+    color: "primary",
+  },
+  nsfw: {
+    variant: "solid",
+    color: "danger",
+  },
+  spoiler: {
+    variant: "soft",
+    color: "warning",
+  },
+  success: {
+    variant: "soft",
+    color: "success",
+  },
+  tag: {
+    variant: "soft",
+    color: "neutral",
+  },
 };
 
 const sizes = {
-  sm: 'px-2 py-0.5 text-xs',
-  md: 'px-2 py-0.5 text-xs',
+  sm: "sm",
+  md: "md",
 };
 
-/**
- * Upvote UI Pill — flair badges and tags
- */
-export function Pill({ variant = 'default', size = 'md', className, children, ...props }) {
+export function Pill({
+  variant = "default",
+  size = "md",
+  children,
+  sx,
+  ...props
+}) {
+  const config = variants[variant];
+
   return (
-    <span
-      className={cn(
-        'inline-flex items-center font-[family-name:var(--font-upvote-sans)] font-semibold',
-        'rounded-upvote-full whitespace-nowrap',
-        variants[variant],
-        sizes[size],
-        className
-      )}
+    <Chip
+      variant={config.variant}
+      color={config.color}
+      size={sizes[size]}
+      sx={{
+        borderRadius: "999px",
+        fontWeight: 600,
+        ...sx,
+      }}
       {...props}
     >
       {children}
-    </span>
+    </Chip>
   );
 }
 
-/**
- * Community badge — subreddit identifier pill
- */
-export function CommunityBadge({ name, icon, className, ...props }) {
+export function CommunityBadge({
+  name,
+  icon,
+  onClick,
+  sx,
+  ...props
+}) {
   return (
-    <span
-      className={cn(
-        'inline-flex items-center gap-1.5 font-[family-name:var(--font-upvote-sans)]',
-        'text-xs font-semibold text-upvote-link hover:text-upvote-link-hover',
-        'transition-colors duration-[var(--duration-upvote-fast)]',
-        className
-      )}
+    <Chip
+      variant="plain"
+      color="primary"
+      onClick={onClick}
+      startDecorator={
+        icon ? (
+          <Avatar
+            size="sm"
+            src={typeof icon === "string" ? icon : undefined}
+          >
+            {typeof icon !== "string" ? icon : null}
+          </Avatar>
+        ) : null
+      }
+      sx={{
+        fontWeight: 600,
+        cursor: onClick ? "pointer" : "default",
+        "&:hover": {
+          bgcolor: onClick ? "primary.softBg" : "transparent",
+        },
+        ...sx,
+      }}
       {...props}
     >
-      {icon && (
-        <span className="w-5 h-5 rounded-full bg-upvote-surface-secondary overflow-hidden shrink-0">
-          {icon}
-        </span>
-      )}
       r/{name}
-    </span>
+    </Chip>
   );
 }
 
-/**
- * Tag — hashtag-style label
- */
-export function Tag({ label, className, ...props }) {
+export function Tag({
+  label,
+  sx,
+  ...props
+}) {
   return (
-    <Pill variant="tag" className={cn('hover:bg-upvote-surface-hover cursor-default', className)} {...props}>
+    <Pill
+      variant="tag"
+      sx={{
+        cursor: "default",
+        ...sx,
+      }}
+      {...props}
+    >
       #{label}
     </Pill>
   );

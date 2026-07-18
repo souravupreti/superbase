@@ -1,9 +1,13 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import supabase from '../lib/supabase';
-import { Loader2, Mail, ArrowLeft, Key } from 'lucide-react';
+import { Mail, ArrowLeft, Key } from 'lucide-react';
 import toast from 'react-hot-toast';
 import { motion } from 'framer-motion';
+import { Box, Sheet, Stack, Typography } from '@mui/joy';
+import { Button } from '../design-system/components/Button';
+import { Input } from '../design-system/components/Input';
+import { Card } from '../design-system/components/Card';
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState('');
@@ -30,78 +34,62 @@ const ForgotPassword = () => {
   };
 
   return (
-    <div className="min-h-screen bg-brand-bg flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
-      <div className="orbital-bg" />
-
-      <motion.div 
-        initial={{ opacity: 0, y: 20 }}
+    <Sheet sx={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', p: 3, bgcolor: 'background.body' }}>
+      <motion.div
+        initial={{ opacity: 0, y: 18 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.4 }}
-        className="max-w-md w-full"
+        transition={{ duration: 0.35 }}
+        style={{ width: '100%', maxWidth: 460 }}
       >
-        <div className="text-center mb-8">
-          <Link to="/login" className="inline-flex items-center gap-1 text-xs font-bold text-brand-primary hover:underline mb-4">
-            <ArrowLeft size={14} /> Back to Sign In
-          </Link>
-          <h2 className="text-3xl font-black text-white tracking-tight">
-            Reset Password
-          </h2>
-          <p className="mt-2 text-xs font-semibold text-brand-muted uppercase tracking-wider">
-            Enter your email to receive a recovery link
-          </p>
-        </div>
+        <Card variant="elevated" padding="lg">
+          <Stack spacing={3}>
+            <Stack spacing={1} alignItems="center">
+              <Typography component={Link} to="/login" level="body-sm" color="primary" sx={{ display: 'inline-flex', alignItems: 'center', gap: 0.75, textDecoration: 'none', fontWeight: 700 }}>
+                <ArrowLeft size={14} /> Back to Sign In
+              </Typography>
+              <Typography level="h2" fontWeight="xl">
+                Reset Password
+              </Typography>
+              <Typography level="body-sm" textAlign="center" textColor="text.secondary">
+                Enter your email to receive a recovery link.
+              </Typography>
+            </Stack>
 
-        <div className="premium-card p-6 md:p-8 rounded-[2rem]">
-          {success ? (
-            <div className="text-center space-y-4 py-4">
-              <div className="w-12 h-12 bg-brand-success/15 text-brand-success rounded-full flex items-center justify-center mx-auto">
-                <Mail size={22} className="animate-pulse" />
-              </div>
-              <h3 className="font-extrabold text-sm text-white">Check Your Inbox</h3>
-              <p className="text-xs text-brand-muted leading-relaxed">
-                We have dispatched a secure password-reset link to <strong className="text-white">{email}</strong>. 
-                Please proceed with the instructions inside to change your login credentials.
-              </p>
-            </div>
-          ) : (
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <div className="flex flex-col gap-1.5">
-                <label className="text-xs font-bold text-brand-muted uppercase tracking-wider">
-                  Email Address
-                </label>
-                <div className="relative group">
-                  <Mail size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-brand-muted group-focus-within:text-brand-primary transition-colors" />
-                  <input 
+            {success ? (
+              <Stack spacing={2} alignItems="center" textAlign="center" sx={{ py: 1 }}>
+                <Sheet variant="soft" color="success" sx={{ width: 48, height: 48, borderRadius: '50%', display: 'grid', placeItems: 'center' }}>
+                  <Mail size={22} />
+                </Sheet>
+                <Typography level="title-md" fontWeight="xl">
+                  Check Your Inbox
+                </Typography>
+                <Typography level="body-sm" textColor="text.secondary">
+                  We sent a secure password-reset link to <Typography fontWeight="lg">{email}</Typography>.
+                </Typography>
+              </Stack>
+            ) : (
+              <Box component="form" onSubmit={handleSubmit}>
+                <Stack spacing={2}>
+                  <Input
+                    label="Email Address"
                     type="email"
                     required
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="w-full bg-black/20 border border-white/5 rounded-2xl py-3 pl-11 pr-4 text-xs font-semibold text-white focus:outline-none focus:border-brand-primary focus:bg-black/30 placeholder-brand-muted transition-all"
                     placeholder="name@email.com"
+                    startDecorator={<Mail size={18} />}
                     disabled={loading}
                   />
-                </div>
-              </div>
-
-              <button
-                type="submit"
-                className="luxury-button w-full text-white font-extrabold text-xs tracking-wider uppercase py-3.5 rounded-2xl transition-all flex items-center justify-center gap-2 mt-4 cursor-pointer"
-                disabled={loading || !email}
-              >
-                {loading ? (
-                  <Loader2 size={16} className="animate-spin text-white" />
-                ) : (
-                  <>
-                    <Key size={16} />
-                    <span>Send Reset Link</span>
-                  </>
-                )}
-              </button>
-            </form>
-          )}
-        </div>
+                  <Button type="submit" loading={loading} fullWidth size="lg" startIcon={<Key size={18} />} disabled={!email}>
+                    Send Reset Link
+                  </Button>
+                </Stack>
+              </Box>
+            )}
+          </Stack>
+        </Card>
       </motion.div>
-    </div>
+    </Sheet>
   );
 };
 

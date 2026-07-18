@@ -1,10 +1,30 @@
-import { useState } from 'react';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { useAuth } from '../contexts/AuthContext';
-import { Loader2, Mail, Lock, LogIn, Sparkles } from 'lucide-react';
-import toast from 'react-hot-toast';
-import { motion } from 'framer-motion';
+import { useState } from "react";
+import { Link, useNavigate, useLocation } from "react-router-dom";
+import { motion } from "framer-motion";
+import toast from "react-hot-toast";
 
+import {
+  Box,
+  Stack,
+  Typography,
+  Sheet,
+  Divider,
+} from "@mui/joy";
+
+import {
+  Mail,
+  LogIn,
+} from "lucide-react";
+
+import { useAuth } from "../contexts/AuthContext";
+
+import { Button } from "../design-system/components/Button";
+import {
+  Input,
+  PasswordInput,
+} from "../design-system/components/Input";
+import { Card } from "../design-system/components/Card";
+import { NexusIcon } from "../design-system/components/Icon";
 const Login = () => {
   const { login } = useAuth();
   const navigate = useNavigate();
@@ -19,126 +39,175 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     if (!email || !password) {
-      toast.error('Please enter all credentials');
+      toast.error("Please enter all credentials");
       return;
     }
 
     setLoading(true);
+
     try {
       await login(email, password);
-      toast.success('Logged in successfully!');
-      navigate(from, { replace: true });
+
+      toast.success("Logged in successfully!");
+
+      navigate(from, {
+        replace: true,
+      });
     } catch (err) {
-      toast.error(err.message || 'Failed to login');
+      toast.error(err.message || "Failed to login");
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="min-h-screen bg-brand-bg flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
-      <div className="orbital-bg" />
+  <Sheet
+    sx={{
+      minHeight: "100vh",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      p: 3,
+      bgcolor: "background.body",
+    }}
+  >
+    <motion.div
+      initial={{ opacity: 0, y: 25 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.45 }}
+      style={{
+        width: "100%",
+        maxWidth: 460,
+      }}
+    >
+      <Card variant="elevated" padding="lg">
+        <Stack spacing={3}>
+          {/* Logo */}
 
-      <motion.div 
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.4 }}
-        className="max-w-md w-full"
-      >
-        {/* Branding header */}
-        <div className="text-center mb-8">
-          <span className="brand-gradient pulse-ring mb-4 inline-flex h-14 w-14 items-center justify-center rounded-3xl text-lg font-black tracking-widest text-white shadow-xl shadow-brand-primary/30">
-            NX
-          </span>
-          <div className="mb-3 flex items-center justify-center gap-2 text-[10px] font-black uppercase tracking-[0.24em] text-brand-accent">
-            <Sparkles size={13} />
-            Nexus access
-          </div>
-          <h2 className="font-display text-4xl font-black tracking-normal text-white">
-            Welcome Back
-          </h2>
-          <p className="mt-2 text-xs font-semibold text-brand-muted uppercase tracking-wider">
-            Log in to access your community command center
-          </p>
-        </div>
+          <Stack
+            spacing={1}
+            alignItems="center"
+          >
+            <NexusIcon
+              size="xl"
+              sx={{
+                color: "primary.500",
+              }}
+            />
 
-        {/* Login Card */}
-        <div className="premium-card p-6 md:p-8 rounded-[2rem]">
-          <form onSubmit={handleSubmit} className="space-y-4">
-            {/* Input Email */}
-            <div className="flex flex-col gap-1.5">
-              <label className="text-xs font-bold text-brand-muted uppercase tracking-wider">
-                Email Address
-              </label>
-              <div className="relative group">
-                <Mail size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-brand-muted group-focus-within:text-brand-primary transition-colors" />
-                <input 
-                  type="email"
-                  required
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="w-full bg-black/20 border border-white/5 rounded-2xl py-3 pl-11 pr-4 text-xs font-semibold text-white focus:outline-none focus:border-brand-primary focus:bg-black/30 placeholder-brand-muted transition-all"
-                  placeholder="name@email.com"
-                  disabled={loading}
-                />
-              </div>
-            </div>
-
-            {/* Input Password */}
-            <div className="flex flex-col gap-1.5">
-              <div className="flex justify-between items-center">
-                <label className="text-xs font-bold text-brand-muted uppercase tracking-wider">
-                  Password
-                </label>
-                <Link to="/forgot-password" className="text-[10px] font-bold text-brand-primary hover:underline">
-                  Forgot Password?
-                </Link>
-              </div>
-              <div className="relative group">
-                <Lock size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-brand-muted group-focus-within:text-brand-primary transition-colors" />
-                <input 
-                  type="password"
-                  required
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  className="w-full bg-black/20 border border-white/5 rounded-2xl py-3 pl-11 pr-4 text-xs font-semibold text-white focus:outline-none focus:border-brand-primary focus:bg-black/30 placeholder-brand-muted transition-all"
-                  placeholder="••••••••••••"
-                  disabled={loading}
-                />
-              </div>
-            </div>
-
-            {/* Submit Button */}
-            <button
-              type="submit"
-              className="luxury-button w-full text-white font-extrabold text-xs tracking-wider uppercase py-3.5 rounded-2xl transition-all flex items-center justify-center gap-2 mt-4 cursor-pointer"
-              disabled={loading}
+            <Typography
+              level="h2"
+              fontWeight="lg"
             >
-              {loading ? (
-                <Loader2 size={16} className="animate-spin text-white" />
-              ) : (
-                <>
-                  <LogIn size={16} />
-                  <span>Log In</span>
-                </>
-              )}
-            </button>
-          </form>
+              Welcome Back
+            </Typography>
 
-          {/* Social / Registration Link */}
-          <div className="mt-6 pt-6 border-t border-white/5 text-center">
-            <p className="text-xs text-brand-muted font-medium">
-              Don't have an account?{' '}
-              <Link to="/register" className="font-extrabold text-brand-primary hover:underline">
-                Create one now
-              </Link>
-            </p>
-          </div>
-        </div>
-      </motion.div>
-    </div>
-  );
+            <Typography
+              level="body-sm"
+              textAlign="center"
+              color="neutral"
+            >
+              Log in to continue to your account.
+            </Typography>
+          </Stack>
+
+          {/* Form */}
+
+          <Box
+            component="form"
+            onSubmit={handleSubmit}
+          >
+            <Stack spacing={2}>
+              <Input
+                label="Email"
+                placeholder="name@email.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                startDecorator={<Mail size={18} />}
+                required
+              />
+
+              <PasswordInput
+                label="Password"
+                placeholder="Enter your password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+
+              <Box
+                display="flex"
+                justifyContent="flex-end"
+              >
+                <Typography
+                  component={Link}
+                  to="/forgot-password"
+                  level="body-sm"
+                  color="primary"
+                  sx={{
+                    textDecoration: "none",
+                    fontWeight: 600,
+                    "&:hover": {
+                      textDecoration: "underline",
+                    },
+                  }}
+                >
+                  Forgot Password?
+                </Typography>
+              </Box>
+
+              <Button
+                type="submit"
+                loading={loading}
+                fullWidth
+                size="lg"
+                startIcon={<LogIn size={18} />}
+              >
+                Log In
+              </Button>
+            </Stack>
+          </Box>
+
+          <Divider />
+
+          <Stack
+            spacing={2}
+            alignItems="center"
+          >
+            <Typography
+              level="body-sm"
+              color="neutral"
+            >
+              Don't have an account?
+            </Typography>
+
+            <Button
+              component={Link}
+              to="/register"
+              variant="ghost"
+              fullWidth
+            >
+              Create Account
+            </Button>
+          </Stack>
+        </Stack>
+      </Card>
+
+      <Typography
+        level="body-xs"
+        textAlign="center"
+        sx={{
+          mt: 3,
+          color: "text.tertiary",
+        }}
+      >
+        © {new Date().getFullYear()} Nexus · Community
+      </Typography>
+    </motion.div>
+  </Sheet>
+);
 };
 
 export default Login;

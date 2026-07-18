@@ -1,62 +1,85 @@
-import { forwardRef } from 'react';
-import { cn } from '../utils/cn';
+import { forwardRef } from "react";
+import JoyButton from "@mui/joy/Button";
+import CircularProgress from "@mui/joy/CircularProgress";
 
-const variants = {
-  primary:
-    'bg-upvote-primary text-upvote-text-inverse hover:bg-upvote-primary-hover active:bg-upvote-brand-hover disabled:bg-upvote-primary-disabled',
-  secondary:
-    'bg-upvote-surface-secondary text-upvote-text-strong hover:bg-[#dbe4e9] active:bg-upvote-surface-secondary',
-  ghost:
-    'bg-transparent text-upvote-text-strong border border-upvote-border-ghost hover:bg-upvote-surface-hover active:bg-upvote-surface-hover',
-  destructive:
-    'bg-upvote-danger text-upvote-text-inverse hover:bg-[#9a0113] active:bg-upvote-danger',
-  icon:
-    'bg-transparent text-upvote-text-strong hover:bg-upvote-surface-hover active:bg-upvote-surface-secondary p-0',
-};
+export const Button = forwardRef(
+  (
+    {
+      children,
+      variant = "primary",
+      size = "md",
+      loading = false,
+      disabled = false,
+      fullWidth = false,
 
-const sizes = {
-  md: 'h-10 px-3 text-sm font-semibold rounded-upvote-pill',
-  sm: 'h-8 px-[9px] text-xs font-semibold rounded-upvote-pill',
-  ghost: 'h-[38px] px-[11px] text-sm font-semibold rounded-upvote-pill',
-  icon: 'h-10 w-10 rounded-upvote-pill inline-flex items-center justify-center',
-  'icon-sm': 'h-8 w-8 rounded-upvote-pill inline-flex items-center justify-center',
-};
+      startIcon,
+      endIcon,
 
-/**
- * Upvote UI Button
- * Variants: primary | secondary | ghost | destructive | icon
- */
-export const Button = forwardRef(function Button(
-  {
-    variant = 'primary',
-    size = 'md',
-    className,
-    children,
-    leftIcon,
-    rightIcon,
-    ...props
-  },
-  ref
-) {
-  const resolvedSize = variant === 'ghost' ? 'ghost' : variant === 'icon' ? (size === 'sm' ? 'icon-sm' : 'icon') : size;
+      type = "button",
 
-  return (
-    <button
-      ref={ref}
-      className={cn(
-        'inline-flex items-center justify-center gap-2 font-[family-name:var(--font-upvote-sans)]',
-        'transition-colors duration-[var(--duration-upvote-fast)] ease-[var(--ease-upvote-standard)]',
-        'focus-visible:outline-2 focus-visible:outline-upvote-focus focus-visible:outline-offset-2',
-        'disabled:cursor-not-allowed disabled:opacity-100',
-        variants[variant],
-        sizes[resolvedSize],
-        className
-      )}
-      {...props}
-    >
-      {leftIcon && <span className="shrink-0">{leftIcon}</span>}
-      {children}
-      {rightIcon && <span className="shrink-0">{rightIcon}</span>}
-    </button>
-  );
-});
+      sx,
+
+      ...props
+    },
+    ref
+  ) => {
+    const joyVariant = {
+      primary: "solid",
+      secondary: "soft",
+      ghost: "plain",
+      destructive: "solid",
+      icon: "plain",
+    }[variant];
+
+    const joyColor = {
+      primary: "primary",
+      secondary: "neutral",
+      ghost: "neutral",
+      destructive: "danger",
+      icon: "neutral",
+    }[variant];
+
+    const joySize = {
+      sm: "sm",
+      md: "md",
+      lg: "lg",
+    }[size];
+
+    return (
+      <JoyButton
+        ref={ref}
+        type={type}
+        loading={loading}
+        loadingIndicator={<CircularProgress size="sm" />}
+        disabled={disabled}
+        fullWidth={fullWidth}
+        variant={joyVariant}
+        color={joyColor}
+        size={joySize}
+        startDecorator={!loading ? startIcon : null}
+        endDecorator={endIcon}
+        sx={{
+          borderRadius: "12px",
+          fontWeight: 700,
+          textTransform: "none",
+          transition: "all .2s ease",
+
+          "&:hover": {
+            transform: "translateY(-2px)",
+          },
+
+          "&:active": {
+            transform: "scale(.98)",
+          },
+
+          ...sx,
+        }}
+        {...props}
+      >
+        {children}
+      </JoyButton>
+    );
+  }
+);
+
+Button.displayName = "Button";

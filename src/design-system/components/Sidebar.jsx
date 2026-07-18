@@ -1,99 +1,145 @@
-import { NavLink } from 'react-router-dom';
-import { cn } from '../utils/cn';
+import { NavLink } from "react-router-dom";
 
-/**
- * Upvote UI Sidebar — left navigation rail
- */
-export function Sidebar({ className, header, footer, children, ...props }) {
+import Box from "@mui/joy/Box";
+import List from "@mui/joy/List";
+import ListItem from "@mui/joy/ListItem";
+import ListItemButton from "@mui/joy/ListItemButton";
+import ListItemDecorator from "@mui/joy/ListItemDecorator";
+import ListItemContent from "@mui/joy/ListItemContent";
+import Chip from "@mui/joy/Chip";
+import Divider from "@mui/joy/Divider";
+import Typography from "@mui/joy/Typography";
+
+export function Sidebar({
+  header,
+  footer,
+  children,
+  sx,
+  ...props
+}) {
   return (
-    <aside
-      className={cn(
-        'hidden md:flex flex-col w-64 shrink-0',
-        'bg-upvote-surface border-r border-upvote-border',
-        'h-[calc(100vh-var(--height-upvote-topbar))] sticky top-14',
-        className
-      )}
+    <Box
+      component="aside"
+      sx={{
+        display: { xs: "none", md: "flex" },
+        flexDirection: "column",
+        width: 260,
+        height: "calc(100vh - 64px)",
+        position: "sticky",
+        top: "64px",
+        borderRight: "1px solid",
+        borderColor: "divider",
+        bgcolor: "background.body",
+        flexShrink: 0,
+        ...sx,
+      }}
       {...props}
     >
       {header && (
-        <div className="p-4 border-b border-upvote-border">
-          {header}
-        </div>
+        <>
+          <Box p={2}>{header}</Box>
+          <Divider />
+        </>
       )}
 
-      <nav className="flex-1 overflow-y-auto p-3 flex flex-col gap-1">
+      <List
+        sx={{
+          flex: 1,
+          overflow: "auto",
+          p: 1,
+          gap: 0.5,
+        }}
+      >
         {children}
-      </nav>
+      </List>
 
       {footer && (
-        <div className="p-4 border-t border-upvote-border">
-          {footer}
-        </div>
+        <>
+          <Divider />
+          <Box p={2}>{footer}</Box>
+        </>
       )}
-    </aside>
+    </Box>
   );
 }
 
-/**
- * Sidebar navigation link
- */
 export function SidebarLink({
   to,
   icon,
   label,
   badge,
   end = false,
-  className,
   onClick,
-  ...props
 }) {
-  const linkClass = ({ isActive }) =>
-    cn(
-      'flex items-center gap-3 px-3 py-2 rounded-upvote-md',
-      'font-[family-name:var(--font-upvote-sans)] text-sm font-medium',
-      'transition-colors duration-[var(--duration-upvote-fast)]',
-      isActive
-        ? 'bg-upvote-surface-hover text-upvote-text-strong font-semibold'
-        : 'text-upvote-text hover:bg-upvote-surface-hover hover:text-upvote-text-strong',
-      className
-    );
+  const content = ({ isActive = false } = {}) => (
+    <ListItem>
+      <ListItemButton
+        selected={isActive}
+        onClick={onClick}
+      >
+        {icon && (
+          <ListItemDecorator>
+            {icon}
+          </ListItemDecorator>
+        )}
 
-  const content = (
-    <>
-      {icon && <span className="shrink-0 text-upvote-text-weak">{icon}</span>}
-      <span className="flex-1 truncate">{label}</span>
-      {badge != null && badge > 0 && (
-        <span className="min-w-5 h-5 px-1.5 flex items-center justify-center rounded-upvote-full bg-upvote-primary text-upvote-text-inverse text-xs font-semibold">
-          {badge > 99 ? '99+' : badge}
-        </span>
-      )}
-    </>
+        <ListItemContent>
+          {label}
+        </ListItemContent>
+
+        {badge > 0 && (
+          <Chip
+            size="sm"
+            color="primary"
+            variant="solid"
+          >
+            {badge > 99 ? "99+" : badge}
+          </Chip>
+        )}
+      </ListItemButton>
+    </ListItem>
   );
 
-  if (to) {
-    return (
-      <NavLink to={to} end={end} className={linkClass} onClick={onClick} {...props}>
-        {content}
-      </NavLink>
-    );
+  if (!to) {
+    return content();
   }
 
   return (
-    <button type="button" className={linkClass({ isActive: false })} onClick={onClick} {...props}>
-      {content}
-    </button>
+    <NavLink to={to} end={end}>
+      {({ isActive }) => content({ isActive })}
+    </NavLink>
   );
 }
 
-export function SidebarSection({ title, className, children, ...props }) {
+export function SidebarSection({
+  title,
+  children,
+}) {
   return (
-    <div className={cn('mt-4 first:mt-0', className)} {...props}>
+    <Box mt={2}>
       {title && (
-        <p className="upvote-caption font-semibold uppercase tracking-wide px-3 mb-1.5">
+        <Typography
+          level="body-xs"
+          textTransform="uppercase"
+          fontWeight="lg"
+          sx={{
+            px: 2,
+            mb: 1,
+            color: "text.tertiary",
+            letterSpacing: ".08em",
+          }}
+        >
           {title}
-        </p>
+        </Typography>
       )}
-      <div className="flex flex-col gap-0.5">{children}</div>
-    </div>
+
+      <List
+        sx={{
+          gap: 0.5,
+        }}
+      >
+        {children}
+      </List>
+    </Box>
   );
 }

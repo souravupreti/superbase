@@ -102,7 +102,7 @@ const Search = () => {
           Search Results For
         </h2>
         <h1 className="text-sm md:text-base font-black text-white mt-1 truncate">
-          "{query || 'Write a search query...'}"
+          "{query || 'Enter a search query'}"
         </h1>
       </div>
 

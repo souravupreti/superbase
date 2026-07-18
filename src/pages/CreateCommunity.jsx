@@ -68,7 +68,7 @@ const CreateCommunity = () => {
       {/* Back link */}
       <div>
         <Link to="/" className="inline-flex items-center gap-1.5 text-xs text-brand-muted hover:text-white font-bold transition-all">
-          <ArrowLeft size={16} /> Backward
+          <ArrowLeft size={16} /> Back
         </Link>
       </div>
 
@@ -78,7 +78,7 @@ const CreateCommunity = () => {
         {/* Header */}
         <div className="border-b border-white/5 pb-3">
           <h2 className="font-black text-sm uppercase tracking-wider text-white">
-            Create A Community
+            Create Community
           </h2>
           <p className="text-[11px] text-brand-muted mt-0.5 leading-relaxed">
             Communities house discussions for specific topics. Choose a clean and matching name!
@@ -151,7 +151,7 @@ const CreateCommunity = () => {
               disabled={loading || !name.trim()}
             >
               {loading ? <Loader2 size={12} className="animate-spin" /> : <Plus size={12} />}
-              Build Community
+              Create Community
             </button>
           </div>
 

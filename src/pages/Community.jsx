@@ -150,14 +150,14 @@ const Community = () => {
       {/* Back button */}
       <div>
         <Link to="/" className="inline-flex items-center gap-1.5 text-xs text-brand-muted hover:text-white font-bold transition-all">
-          <ArrowLeft size={16} /> Backward Feed
+          <ArrowLeft size={16} /> Back to Feed
         </Link>
       </div>
 
       {/* Community Banner details */}
       <div className="bg-brand-card border border-white/5 rounded-3xl overflow-hidden shadow-md">
         {/* Banner mock theme color */}
-        <div className="h-28 bg-gradient-to-r from-brand-secondary/40 via-brand-accent/25 to-brand-primary/35" />
+        <div className="h-28 bg-brand-bg border-b border-white/5" />
         
         {/* Profile elements */}
         <div className="p-4 md:p-6 -mt-10 flex flex-col sm:flex-row sm:items-end justify-between gap-4">

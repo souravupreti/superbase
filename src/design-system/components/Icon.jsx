@@ -1,83 +1,127 @@
-import { cn } from '../utils/cn';
+import Box from "@mui/joy/Box";
 
 const sizes = {
-  xs: 'w-3 h-3',
-  sm: 'w-4 h-4',
-  md: 'w-5 h-5',
-  lg: 'w-6 h-6',
-  xl: 'w-8 h-8',
+  xs: 14,
+  sm: 16,
+  md: 20,
+  lg: 24,
+  xl: 32,
 };
 
-/**
- * Upvote UI Icon wrapper — consistent sizing for lucide or custom SVGs
- */
-export function Icon({ children, size = 'md', className, label, ...props }) {
+export function Icon({
+  children,
+  size = "md",
+  sx,
+  ...props
+}) {
   return (
-    <span
-      role={label ? 'img' : undefined}
-      aria-label={label}
-      aria-hidden={!label}
-      className={cn('inline-flex items-center justify-center shrink-0', sizes[size], className)}
+    <Box
+      component="span"
+      sx={{
+        display: "inline-flex",
+        alignItems: "center",
+        justifyContent: "center",
+        width: sizes[size],
+        height: sizes[size],
+        flexShrink: 0,
+
+        "& svg": {
+          width: "100%",
+          height: "100%",
+        },
+
+        ...sx,
+      }}
       {...props}
     >
       {children}
-    </span>
+    </Box>
   );
 }
 
-/** Reddit upvote arrow */
-export function UpvoteIcon({ active = false, className, ...props }) {
+export function UpvoteIcon({
+  active = false,
+  sx,
+  ...props
+}) {
   return (
-    <svg
-      viewBox="0 0 20 20"
-      fill="currentColor"
-      className={cn(
-        'w-5 h-5',
-        active ? 'text-upvote-upvote' : 'text-upvote-text-weak',
-        className
-      )}
-      aria-hidden="true"
+    <Icon
+      sx={{
+        color: active ? "danger.500" : "text.secondary",
+        ...sx,
+      }}
       {...props}
     >
-      <path d="M10 3.5L3.5 12h4.5v4.5h4V12h4.5L10 3.5z" />
-    </svg>
+      <svg viewBox="0 0 20 20" fill="currentColor">
+        <path d="M10 3.5L3.5 12H8v4.5h4V12h4.5L10 3.5z" />
+      </svg>
+    </Icon>
   );
 }
 
-/** Reddit downvote arrow */
-export function DownvoteIcon({ active = false, className, ...props }) {
+export function DownvoteIcon({
+  active = false,
+  sx,
+  ...props
+}) {
   return (
-    <svg
-      viewBox="0 0 20 20"
-      fill="currentColor"
-      className={cn(
-        'w-5 h-5',
-        active ? 'text-upvote-downvote' : 'text-upvote-text-weak',
-        className
-      )}
-      aria-hidden="true"
+    <Icon
+      sx={{
+        color: active ? "primary.500" : "text.secondary",
+        ...sx,
+      }}
       {...props}
     >
-      <path d="M10 16.5L16.5 8H12V3.5H8V8H3.5L10 16.5z" />
-    </svg>
+      <svg viewBox="0 0 20 20" fill="currentColor">
+        <path d="M10 16.5L16.5 8H12V3.5H8V8H3.5L10 16.5z" />
+      </svg>
+    </Icon>
   );
 }
 
-/** Snoo mascot simplified mark */
-export function SnooIcon({ className, ...props }) {
+export function NexusIcon({
+  sx,
+  ...props
+}) {
   return (
-    <svg
-      viewBox="0 0 20 20"
-      fill="currentColor"
-      className={cn('w-5 h-5 text-upvote-brand', className)}
-      aria-hidden="true"
+    <Icon
+      sx={{
+        color: "primary.500",
+        ...sx,
+      }}
       {...props}
     >
-      <circle cx="10" cy="11" r="6" />
-      <circle cx="7" cy="10" r="1.2" fill="white" />
-      <circle cx="13" cy="10" r="1.2" fill="white" />
-      <path d="M10 3.5a1.5 1.5 0 0 1 0 3" stroke="currentColor" strokeWidth="1.5" fill="none" />
-    </svg>
+      <svg viewBox="0 0 24 24" fill="none">
+        <circle
+          cx="12"
+          cy="12"
+          r="9"
+          stroke="currentColor"
+          strokeWidth="2"
+        />
+
+        <path
+          d="M7 16L17 8"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+        />
+
+        <circle
+          cx="7"
+          cy="16"
+          r="2"
+          fill="currentColor"
+        />
+
+        <circle
+          cx="17"
+          cy="8"
+          r="2"
+          fill="currentColor"
+        />
+      </svg>
+    </Icon>
   );
 }
 

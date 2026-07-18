@@ -1,104 +1,80 @@
-import React from 'react';
+import { Avatar, Box, Card, Divider, Skeleton, Stack } from '@mui/joy';
 
-export const PostSkeleton = () => {
-  return (
-    <div className="bg-brand-card border border-white/5 rounded-3xl p-5 flex gap-4 w-full">
-      {/* Vote skeleton */}
-      <div className="flex flex-col items-center gap-2 shrink-0 bg-white/3 py-2 px-2 rounded-2xl w-9 h-24 skeleton-shimmer" />
+export const PostSkeleton = () => (
+  <Card variant="outlined" sx={{ p: 2, borderRadius: '16px', bgcolor: 'background.surface' }}>
+    <Stack direction="row" spacing={1.75}>
+      <Stack alignItems="center" spacing={0.75} sx={{ width: 42, flexShrink: 0 }}>
+        <Skeleton variant="circular" width={28} height={28} />
+        <Skeleton variant="text" width={22} />
+        <Skeleton variant="circular" width={28} height={28} />
+      </Stack>
+      <Box sx={{ flex: 1 }}>
+        <Stack direction="row" spacing={1} alignItems="center">
+          <Skeleton variant="circular">
+            <Avatar size="sm" />
+          </Skeleton>
+          <Skeleton variant="text" width={110} />
+          <Skeleton variant="text" width={80} />
+        </Stack>
+        <Skeleton variant="text" width="72%" sx={{ mt: 1.5, fontSize: '1.25rem' }} />
+        <Skeleton variant="text" width="100%" />
+        <Skeleton variant="text" width="84%" />
+        <Divider sx={{ my: 1.5 }} />
+        <Stack direction="row" spacing={1}>
+          <Skeleton variant="rectangular" width={92} height={30} sx={{ borderRadius: '10px' }} />
+          <Skeleton variant="rectangular" width={72} height={30} sx={{ borderRadius: '10px' }} />
+          <Skeleton variant="rectangular" width={72} height={30} sx={{ borderRadius: '10px' }} />
+        </Stack>
+      </Box>
+    </Stack>
+  </Card>
+);
 
-      {/* Meta + Content */}
-      <div className="flex-1 space-y-3">
-        {/* Meta row */}
-        <div className="flex items-center gap-2">
-          <div className="h-4 w-20 rounded-full skeleton-shimmer" />
-          <div className="h-2 w-2 rounded-full skeleton-shimmer" />
-          <div className="h-3 w-32 rounded skeleton-shimmer" />
-        </div>
+export const CommentSkeleton = () => (
+  <Stack spacing={2}>
+    {[1, 2].map((i) => (
+      <Stack key={i} direction="row" spacing={1.25}>
+        <Skeleton variant="circular" width={32} height={32} />
+        <Box sx={{ flex: 1 }}>
+          <Skeleton variant="text" width={140} />
+          <Skeleton variant="text" width="100%" />
+          <Skeleton variant="text" width="78%" />
+          <Box sx={{ pl: 3, mt: 2, borderLeft: '1px solid', borderColor: 'neutral.outlinedBorder' }}>
+            <Skeleton variant="text" width={120} />
+            <Skeleton variant="text" width="72%" />
+          </Box>
+        </Box>
+      </Stack>
+    ))}
+  </Stack>
+);
 
-        {/* Title */}
-        <div className="h-5 w-3/4 rounded-lg skeleton-shimmer" />
+export const CommunityListSkeleton = () => (
+  <Stack spacing={1.5}>
+    {[1, 2, 3].map((i) => (
+      <Stack key={i} direction="row" spacing={1.25} alignItems="center">
+        <Skeleton variant="circular" width={32} height={32} />
+        <Box sx={{ flex: 1 }}>
+          <Skeleton variant="text" width="70%" />
+          <Skeleton variant="text" width="44%" />
+        </Box>
+      </Stack>
+    ))}
+  </Stack>
+);
 
-        {/* Body content lines */}
-        <div className="space-y-2">
-          <div className="h-3 w-full rounded skeleton-shimmer" />
-          <div className="h-3 w-5/6 rounded skeleton-shimmer" />
-          <div className="h-3 w-2/3 rounded skeleton-shimmer" />
-        </div>
-
-        {/* Footer row */}
-        <div className="flex gap-4 pt-3">
-          <div className="h-6 w-20 rounded-lg skeleton-shimmer" />
-          <div className="h-6 w-20 rounded-lg skeleton-shimmer" />
-          <div className="h-6 w-20 rounded-lg skeleton-shimmer" />
-        </div>
-      </div>
-    </div>
-  );
-};
-
-export const CommentSkeleton = () => {
-  return (
-    <div className="space-y-4">
-      {[1, 2].map((i) => (
-        <div key={i} className="flex gap-3 py-2">
-          <div className="w-8 h-8 rounded-full skeleton-shimmer shrink-0" />
-          <div className="flex-1 space-y-2">
-            <div className="flex items-center gap-2">
-              <div className="h-3 w-24 rounded skeleton-shimmer" />
-              <div className="h-2 w-2 rounded-full skeleton-shimmer" />
-              <div className="h-3 w-12 rounded skeleton-shimmer" />
-            </div>
-            <div className="h-3 w-full rounded skeleton-shimmer" />
-            <div className="h-3 w-4/5 rounded skeleton-shimmer" />
-            
-            {/* Nested Reply Skeleton Indentation */}
-            <div className="pl-6 border-l border-white/5 space-y-3 mt-3">
-              <div className="flex gap-3">
-                <div className="w-6 h-6 rounded-full skeleton-shimmer shrink-0" />
-                <div className="flex-1 space-y-1.5">
-                  <div className="h-3 w-20 rounded skeleton-shimmer" />
-                  <div className="h-3 w-5/6 rounded skeleton-shimmer" />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      ))}
-    </div>
-  );
-};
-
-export const CommunityListSkeleton = () => {
-  return (
-    <div className="space-y-3">
+export const ProfileHeaderSkeleton = () => (
+  <Card variant="outlined" sx={{ p: 3, alignItems: 'center', borderRadius: '16px', bgcolor: 'background.surface' }}>
+    <Skeleton variant="circular" width={80} height={80} />
+    <Skeleton variant="text" width={150} sx={{ mt: 1.5, fontSize: '1.2rem' }} />
+    <Skeleton variant="text" width={220} />
+    <Stack direction="row" spacing={4} sx={{ mt: 2 }}>
       {[1, 2, 3].map((i) => (
-        <div key={i} className="flex items-center gap-3">
-          <div className="w-8 h-8 rounded-lg skeleton-shimmer shrink-0" />
-          <div className="flex-1 space-y-2">
-            <div className="h-3 w-3/4 rounded skeleton-shimmer" />
-            <div className="h-2.5 w-1/2 rounded skeleton-shimmer" />
-          </div>
-        </div>
+        <Box key={i} sx={{ textAlign: 'center' }}>
+          <Skeleton variant="text" width={32} />
+          <Skeleton variant="text" width={64} />
+        </Box>
       ))}
-    </div>
-  );
-};
-
-export const ProfileHeaderSkeleton = () => {
-  return (
-    <div className="bg-brand-card border border-white/5 rounded-3xl p-6 flex flex-col items-center">
-      <div className="w-20 h-20 rounded-full skeleton-shimmer mb-4" />
-      <div className="h-5 w-32 rounded skeleton-shimmer mb-2" />
-      <div className="h-3.5 w-48 rounded skeleton-shimmer mb-6" />
-      
-      <div className="grid grid-cols-3 gap-6 w-full max-w-sm pt-4 border-t border-white/5">
-        {[1, 2, 3].map((col) => (
-          <div key={col} className="flex flex-col items-center space-y-1.5">
-            <div className="h-4 w-6 rounded skeleton-shimmer" />
-            <div className="h-3 w-16 rounded skeleton-shimmer" />
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-};
+    </Stack>
+  </Card>
+);

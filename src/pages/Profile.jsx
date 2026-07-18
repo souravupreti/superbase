@@ -125,7 +125,7 @@ const Profile = () => {
         <ProfileHeaderSkeleton />
       ) : (
         <div className="bg-brand-card border border-white/5 rounded-3xl p-6 flex flex-col items-center relative overflow-hidden">
-          <div className="absolute top-0 inset-x-0 h-24 bg-gradient-to-r from-brand-primary/25 to-brand-accent/25" />
+          <div className="absolute top-0 inset-x-0 h-24 bg-brand-bg border-b border-white/5" />
           
           <img 
             src={author.avatar} 
@@ -166,7 +166,7 @@ const Profile = () => {
       <div className="flex items-center gap-2 border-b border-white/5 pb-2">
         <User size={16} className="text-brand-primary" />
         <h3 className="font-extrabold text-xs uppercase tracking-wider text-brand-muted">
-          {isOwner ? 'Your Postings feed' : `Recent activity by ${author.username}`}
+          {isOwner ? 'Your posts' : `Recent activity by ${author.username}`}
         </h3>
       </div>
 
