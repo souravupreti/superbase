@@ -155,7 +155,7 @@ const Home = () => {
         <Card variant="outlined" sx={{ p: 2.25, borderRadius: '16px', bgcolor: 'background.surface', boxShadow: '0 1px 2px rgba(15, 23, 42, 0.04)' }}>
           {!isCreating ? (
             <Stack direction="row" spacing={1.5} alignItems="center">
-              <Avatar size="sm">{user.email?.[0]?.toUpperCase() || 'U'}</Avatar>
+              <Avatar size="sm" sx={{ width: 30, height: 30, fontSize: 13 }}>{user.email?.[0]?.toUpperCase() || 'U'}</Avatar>
               <Input
                 readOnly
                 value=""
@@ -256,16 +256,39 @@ const Home = () => {
         </Card>
       )}
 
-      <Sheet variant="outlined" sx={{ p: 0.75, borderRadius: '14px', bgcolor: 'background.surface' }}>
+      <Sheet variant="outlined" sx={{ p: 0.75, borderRadius: '18px', bgcolor: 'background.surface' }}>
         <Tabs value={sortBy} onChange={(_, value) => setSortBy(value)} sx={{ bgcolor: 'transparent' }}>
-          <TabList disableUnderline sx={{ gap: 0.5, bgcolor: 'transparent' }}>
-            <Tab value="newest" indicatorInset startDecorator={<Clock size={15} />}>
+          <TabList
+            disableUnderline
+            sx={{
+              gap: 0.75,
+              bgcolor: 'transparent',
+              '--Tab-radius': '12px',
+              '--Tab-minHeight': '36px',
+              '--Tab-paddingInline': '14px',
+              '& .MuiTab-root': {
+                borderRadius: '12px',
+                color: 'text.secondary',
+                fontWeight: 600,
+                '&:hover': {
+                  bgcolor: '#F8FAFC',
+                  color: 'text.primary',
+                },
+                '&.Mui-selected': {
+                  bgcolor: '#F1F5F9',
+                  color: 'text.primary',
+                  boxShadow: 'inset 0 -2px 0 #111827',
+                },
+              },
+            }}
+          >
+            <Tab value="newest" disableIndicator startDecorator={<Clock size={14} />}>
               Newest
             </Tab>
-            <Tab value="top" indicatorInset startDecorator={<Sparkles size={15} />}>
+            <Tab value="top" disableIndicator startDecorator={<Sparkles size={14} />}>
               Top
             </Tab>
-            <Tab value="trending" indicatorInset startDecorator={<Flame size={15} />}>
+            <Tab value="trending" disableIndicator startDecorator={<Flame size={14} />}>
               Trending
             </Tab>
           </TabList>

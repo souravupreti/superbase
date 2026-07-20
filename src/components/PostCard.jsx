@@ -211,53 +211,11 @@ const PostCard = ({ post, onPostDeleted = null, onPostEdited = null }) => {
         },
       }}
     >
-      <Stack direction="row" spacing={2} alignItems="flex-start">
-        <Stack
-          alignItems="center"
-          spacing={0.25}
-          sx={{
-            width: 42,
-            flexShrink: 0,
-            borderRadius: '14px',
-            bgcolor: 'background.level1',
-            border: '1px solid',
-            borderColor: 'neutral.outlinedBorder',
-            py: 0.75,
-          }}
-        >
-          <IconButton
-            size="sm"
-            variant={userVote === 1 ? 'soft' : 'plain'}
-            color={userVote === 1 ? 'primary' : 'neutral'}
-            onClick={() => handleVote('up')}
-            disabled={votingLoading}
-            aria-label="Upvote"
-          >
-            <ArrowBigUp size={22} fill={userVote === 1 ? 'currentColor' : 'none'} />
-          </IconButton>
-          <Typography
-            level="body-sm"
-            fontWeight="xl"
-            textColor={userVote === 1 ? 'primary.600' : userVote === -1 ? 'danger.600' : 'text.primary'}
-          >
-            {score}
-          </Typography>
-          <IconButton
-            size="sm"
-            variant={userVote === -1 ? 'soft' : 'plain'}
-            color={userVote === -1 ? 'danger' : 'neutral'}
-            onClick={() => handleVote('down')}
-            disabled={votingLoading}
-            aria-label="Downvote"
-          >
-            <ArrowBigDown size={22} fill={userVote === -1 ? 'currentColor' : 'none'} />
-          </IconButton>
-        </Stack>
-
-        <Box sx={{ flex: 1, minWidth: 0 }}>
+      <Stack spacing={1.5}>
+        <Box sx={{ minWidth: 0 }}>
           <Stack direction="row" justifyContent="space-between" alignItems="flex-start" spacing={1}>
-            <Stack direction="row" spacing={1} alignItems="center" sx={{ minWidth: 0, flexWrap: 'wrap' }}>
-              <Avatar src={author.avatar} alt={author.username} size="sm" />
+            <Stack direction="row" spacing={0.875} alignItems="center" sx={{ minWidth: 0, flexWrap: 'wrap' }}>
+              <Avatar src={author.avatar} alt={author.username} size="sm" sx={{ width: 26, height: 26, '--Avatar-fontSize': '0.75rem' }} />
               {post.community && (
                 <Chip component={Link} to={`/r/${post.community.id}`} size="sm" variant="soft" color="primary">
                   r/{post.community.name}
@@ -370,6 +328,50 @@ const PostCard = ({ post, onPostDeleted = null, onPostEdited = null }) => {
           <Divider sx={{ my: 1.75 }} />
 
           <Stack direction="row" spacing={0.75} alignItems="center" flexWrap="wrap">
+            <Sheet
+              variant="soft"
+              color="neutral"
+              sx={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: 0.25,
+                borderRadius: '12px',
+                bgcolor: 'background.level1',
+                border: '1px solid',
+                borderColor: 'neutral.outlinedBorder',
+                px: 0.5,
+                minHeight: 36,
+              }}
+            >
+              <IconButton
+                size="sm"
+                variant={userVote === 1 ? 'soft' : 'plain'}
+                color={userVote === 1 ? 'primary' : 'neutral'}
+                onClick={() => handleVote('up')}
+                disabled={votingLoading}
+                aria-label="Upvote"
+              >
+                <ArrowBigUp size={16} fill={userVote === 1 ? 'currentColor' : 'none'} />
+              </IconButton>
+              <Typography
+                level="body-sm"
+                fontWeight="xl"
+                textColor={userVote === 1 ? 'primary.600' : userVote === -1 ? 'danger.600' : 'text.primary'}
+                sx={{ minWidth: 20, textAlign: 'center' }}
+              >
+                {score}
+              </Typography>
+              <IconButton
+                size="sm"
+                variant={userVote === -1 ? 'soft' : 'plain'}
+                color={userVote === -1 ? 'danger' : 'neutral'}
+                onClick={() => handleVote('down')}
+                disabled={votingLoading}
+                aria-label="Downvote"
+              >
+                <ArrowBigDown size={16} fill={userVote === -1 ? 'currentColor' : 'none'} />
+              </IconButton>
+            </Sheet>
             <Button component={Link} to={`/post/${post.id}`} size="sm" variant="plain" color="neutral" startDecorator={<MessageSquare size={16} />}>
               {post.commentCount} {post.commentCount === 1 ? 'Comment' : 'Comments'}
             </Button>

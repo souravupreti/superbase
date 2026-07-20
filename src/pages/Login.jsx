@@ -203,7 +203,7 @@ const Login = () => {
           color: "text.tertiary",
         }}
       >
-        © {new Date().getFullYear()} Nexus · Community
+        © {new Date().getFullYear()} Agora · Community
       </Typography>
     </motion.div>
   </Sheet>

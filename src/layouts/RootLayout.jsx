@@ -95,10 +95,10 @@ const BrandMark = () => (
         boxShadow: '0 8px 18px rgba(37, 99, 235, 0.18)',
       }}
     >
-      NX
+      AG
     </Sheet>
     <Typography level="title-lg" fontWeight="xl" sx={{ display: { xs: 'none', sm: 'block' }, letterSpacing: '-0.01em' }}>
-      Nexus
+      Agora
     </Typography>
   </Link>
 );
@@ -107,12 +107,7 @@ const SidebarNav = ({ unreadCount, onNavigate }) => (
   <List size="sm" sx={{ '--ListItem-radius': '12px', gap: 0.5 }}>
     {navItems.map(({ to, label, icon: Icon, notifications }) => (
       <ListItem key={to}>
-        <ListItemButton
-          component={NavLink}
-          to={to}
-          onClick={onNavigate}
-          sx={navButtonSx}
-        >
+        <ListItemButton component={NavLink} to={to} onClick={onNavigate} sx={navButtonSx}>
           <Icon size={18} />
           <ListItemContent>{label}</ListItemContent>
           {notifications && unreadCount > 0 && (
@@ -207,10 +202,9 @@ const RootLayout = () => {
       >
         <Box
           sx={{
-            mx: 'auto',
-            maxWidth: 1280,
+            width: '100%',
             height: 64,
-            px: { xs: 2, md: 3 },
+            px: { xs: 2, md: 4 },
             display: 'flex',
             alignItems: 'center',
             gap: 2,
@@ -228,7 +222,16 @@ const RootLayout = () => {
 
           <BrandMark />
 
-          <Box component="form" onSubmit={handleSearchSubmit} sx={{ flex: 1, maxWidth: 560, mx: { xs: 0, md: 3 } }}>
+          <Box
+            component="form"
+            onSubmit={handleSearchSubmit}
+            sx={{
+              flex: '1 1 520px',
+              maxWidth: 700,
+              ml: { xs: 0, md: 3 },
+              mr: { xs: 0, md: 2 },
+            }}
+          >
             <Input
               size="md"
               value={searchQuery}
@@ -249,7 +252,7 @@ const RootLayout = () => {
             />
           </Box>
 
-          <Stack direction="row" alignItems="center" spacing={1}>
+          <Stack direction="row" alignItems="center" spacing={1} sx={{ ml: 'auto', flexShrink: 0 }}>
             {user ? (
               <>
                 <Button
